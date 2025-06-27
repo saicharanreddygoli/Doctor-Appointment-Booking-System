@@ -1,0 +1,429 @@
+/* src/App.css */
+
+/* Import Bootstrap CSS */
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+/* Import Ant Design CSS */
+@import "../node_modules/antd/dist/reset.css";
+
+
+/* Basic reset */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(190, 203, 203);
+  min-height: 100vh;
+}
+
+/* Adjusted Navbar Link Style */
+.bg-body-tertiary .navbar-nav .nav-link {
+   color: black;
+   margin-right: 20px;
+   transition: color 0.2s ease; /* Added transition */
+}
+.bg-body-tertiary .navbar-nav .nav-link:hover {
+    color: #007bff;
+}
+
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.route-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 50px); /* Assuming footer is approx 50px */
+}
+
+.home-container {
+  max-width: 100vw;
+  min-height: calc(100vh - 50px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.left-side,
+.right-side {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.left-side img {
+  max-width: 100%;
+  height: auto;
+  max-height: 70vh;
+}
+
+.right-side {
+  text-align: center;
+}
+
+.right-side p {
+   margin: 0;
+}
+
+span {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.f-letter {
+  font-size: 3em;
+}
+
+.s-letter {
+  font-size: 2.2em;
+}
+
+.t-letter {
+  font-size: 1.5em;
+}
+
+.about-us-text {
+   margin-top: 40px;
+   padding: 20px;
+   background-color: #f8f9fa;
+   border-radius: 5px;
+   box-shadow: 0 0 5px rgba(0,0,0,0.1);
+   margin-left: auto;
+   margin-right: auto;
+   max-width: 960px;
+}
+
+.about-us-text p {
+   text-align: justify;
+   color: #212529;
+}
+
+/******************** Layout Styles (Admin/User Home) ********************/
+.main {
+  padding: 10px;
+  min-height: calc(100vh - 70px);
+}
+
+.layout {
+  display: flex;
+  min-height: calc(100vh - 90px);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Added subtle shadow to layout */
+}
+
+.sidebar {
+  min-height: 100%;
+  width: 200px;
+  background-color: rgb(153, 145, 145);
+  color: white;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: whitesmoke;
+}
+
+.header {
+  height: 60px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: white;
+  border-radius: 5px;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.body {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 15px;
+}
+
+.logo {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.logo h2 {
+  text-align: center;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.menu {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px;
+}
+
+.menu-items {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  color: white;
+  display: flex;
+  align-items: center;
+  cursor: pointer; /* Added cursor style */
+}
+
+.menu-items:hover {
+   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu-items.active {
+   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.menu-items span {
+   text-decoration: none;
+   font-size: 1.1rem;
+   margin-left: 10px;
+}
+
+.menu-items .icon {
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.header-content h3 {
+    margin: 0;
+    margin-left: 15px; /* Added margin left to separate from notification */
+}
+
+.notify {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.notify .icon {
+  font-size: 1.5rem;
+}
+
+/* Style for notification cards in the Notification component */
+.card {
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+}
+
+.card-text {
+  padding: 10px;
+}
+
+
+/******************** General Component Styles ********************/
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 2px grey;
+  background-color: whitesmoke;
+  max-width: 700px;
+  width: 100%;
+  margin: 20px auto;
+}
+
+.component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  border: 2px dashed grey;
+  border-radius: 10px;
+  width: 100%;
+  min-height: 200px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.component p {
+  margin: 10px 0;
+  color: grey;
+}
+
+.btn-progress {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.btn-progress button {
+  color: grey;
+  padding: 10px 20px;
+  margin-right: 10px;
+}
+
+.btn-progress button:last-child {
+   margin-right: 0;
+}
+
+.btn-progress button:hover {
+  box-shadow: 0 0 10px grey;
+}
+
+progress {
+  width: 100%;
+  height: 10px;
+  appearance: none;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  border: none;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+
+progress::-webkit-progress-value {
+  background-color: grey;
+  border-radius: 10px;
+}
+
+/* --- New Styles for Doctor Card Details Layout --- */
+.doctor-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Creates two equal columns */
+    gap: 10px; /* Adds space between grid items */
+    margin-top: 15px; /* Space below the subtitle */
+    margin-bottom: 15px; /* Space above the button */
+    font-size: 0.95em; /* Slightly smaller text for details */
+}
+
+.doctor-details-grid .detail-item {
+    /* Basic styling for each detail block */
+    line-height: 1.3; /* Improve readability */
+}
+
+.doctor-details-grid .detail-item small {
+    display: block; /* Ensure the label text is on its own line */
+    font-size: 0.8em; /* Make the labels smaller */
+    color: #555; /* Make labels slightly darker than muted text */
+    margin-bottom: 2px; /* Small space between label and value */
+}
+
+.doctor-details-grid .detail-item b {
+     font-weight: 600; /* Make the value bold */
+}
+
+
+.doctor-details-grid .detail-item.full-width {
+    grid-column: span 2; /* This makes the address item span across both columns */
+}
+/* --- End New Styles --- */
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+     border-radius: 5px;
+  }
+
+   .sidebar .logo {
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+      border-bottom: none;
+   }
+
+  .sidebar .menu {
+      flex-direction: row;
+      justify-content: space-around;
+      padding: 0 10px;
+      flex-wrap: wrap;
+  }
+
+  .sidebar .menu-items {
+     margin-bottom: 0;
+     padding: 8px 5px;
+     flex-basis: 0;
+     flex-grow: 1;
+     justify-content: center;
+  }
+
+  .sidebar .menu-items span {
+      display: none;
+  }
+   .sidebar .menu-items .icon {
+      margin: 0;
+      font-size: 1.5rem;
+   }
+
+  .header {
+    margin-bottom: 10px;
+  }
+ .header-content h3 {
+    margin-left: 10px; /* Adjust margin on mobile */
+ }
+
+  .home-container {
+    flex-direction: column;
+  }
+
+  .left-side,
+  .right-side {
+    width: 100%;
+    padding: 10px;
+  }
+  .left-side img {
+     max-height: 50vh;
+  }
+
+  .f-letter { font-size: 2em; }
+  .s-letter { font-size: 1.5em; }
+  .t-letter { font-size: 1.2em; }
+
+  .notify {
+      margin-right: 10px;
+  }
+
+  .bg-body-tertiary .navbar-nav .nav-link {
+     margin-right: 10px;
+  }
+}
