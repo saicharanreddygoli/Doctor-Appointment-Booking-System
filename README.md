@@ -1,4 +1,4 @@
-# Doctor-Appointment-Booking-System# MediCareBook: Doctor Appointment Booking System
+# MediCareBook: Doctor Appointment Booking System
 
 MediCareBook is a full-stack application for managing doctor appointments, featuring distinct roles for Users, Doctors, and Administrators. This project is built using the MERN stack (MongoDB, Express.js, React, Node.js).
 
@@ -11,7 +11,7 @@ MediCareBook is a full-stack application for managing doctor appointments, featu
     *   View all registered users.
     *   View and manage doctor applications (approve/reject).
     *   View all appointments across the system.
-    *   Create new administrator accounts (restricted function).
+    *   Create new administrator accounts (restricted function, accessible only by logged-in admins).
 *   **Notifications:** Users and Doctors receive notifications for relevant events (e.g., doctor application status, new appointment requests, appointment status updates).
 *   **File Uploads:** Patients can upload documents (like medical history) when booking an appointment.
 
@@ -82,27 +82,6 @@ Follow these steps to set up and run the project locally.
         ```
         *Ensure the port `5000` matches the `PORT` set in your backend `.env` file.*
 
-4.  **Create the First Administrator Account (Manual Database Step):**
-    *   **This is a necessary one-time manual step for security.** Public registration should not allow creating powerful admin accounts initially.
-    *   Ensure your backend is running (`node index.js` or `npm start` from the `backend` directory) so Mongoose is connected.
-    *   Use a MongoDB client (like MongoDB Compass, the built-in Atlas Query tool, or a script) to connect to your database.
-    *   Navigate to the `users` collection.
-    *   **Insert a new document** with the following structure. **CRITICAL:** The `password` field **must** contain a **bcrypt hashed password**, not the plain text password.
-        ```json
-        {
-          "fullName": "Your Admin Name",
-          "email": "your.admin.email@example.com",
-          "password": "PASTE_YOUR_BCRYPT_HASH_HERE",
-          "phone": "Your Phone Number",
-          "type": "admin",
-          "isdoctor": false,
-          "notification": [],
-          "seennotification": []
-        }
-        ```
-        *   Replace placeholders with your desired admin details.
-        *   Generate the bcrypt hash using a tool or a Node.js script (e.g., using the `bcryptjs` library).
-
 ### Running the Application
 
 1.  **Start the Backend:**
@@ -122,8 +101,13 @@ The application should now be running and accessible in your browser.
 ### General Access (Public)
 
 *   **Home (`/`):** Landing page.
-*   **Register (`/register`):** Create a new account. The form shows both "User" and "Admin" options, but the backend logic ensures only the *first* user ever to register can successfully choose "Admin". Subsequent attempts to register as "Admin" will be rejected. Standard "User" registration is always permitted (if email is unique).
-*   **Login (`/login`):** Log in with existing credentials. Redirects to `/userhome` or `/adminhome` based on user type.
+*   **Register (`/register`):**
+    *   Create a new account. The form shows both "User" and "Admin" options.
+    *   **Initial Admin Registration:** The **very first user** to register can successfully select "Admin" and create the administrator account.
+    *   **Subsequent Admin Registration Attempts:** If an admin account already exists in the database, any subsequent attempt by a user to register and select "Admin" will be **blocked by the backend**, and an error message will be displayed on the frontend indicating that an administrator already exists.
+    *   **Standard User Registration:** Registering as "User" is always permitted via this form (assuming the email is unique).
+    *   Successful registration (either user or the first admin) redirects to the Login page.
+*   **Login (`/login`):** Log in with existing credentials (User, Doctor, or Admin). Redirects to `/userhome` or `/adminhome` based on user type.
 
 ### User Role (`type: 'user'`)
 
@@ -137,7 +121,7 @@ The application should now be running and accessible in your browser.
 
 ### Doctor Role (`isdoctor: true`)
 
-*   First, apply as a User and get approved by an Admin. Your user account's `isdoctor` flag will be set to `true`.
+*   First, register as a User and apply via the "Apply doctor" form. An Admin must then approve your application. Your user account's `isdoctor` flag will be set to `true`.
 *   Login with your user account.
 *   Redirected to `/userhome`. The User Home interface adapts slightly for doctors.
 *   **Appointments:** View a list of appointments booked *with you* by patients. See patient details, appointment date, status, and attached documents.
@@ -149,13 +133,13 @@ The application should now be running and accessible in your browser.
 
 ### Admin Role (`type: 'admin'`)
 
-*   **The first admin must be created manually in the database.** Subsequent admins can be created through the application.
+*   **The first admin account is created via the public registration page by selecting "Admin".**
 *   Login with an admin account.
 *   Redirected to `/adminhome`.
 *   **Appointments:** View a list of *all* appointments in the system.
 *   **Doctors:** View a list of all doctor applications and their status. Approve or reject pending applications. Approving a doctor updates their status and sets the linked user's `isdoctor` flag to `true`.
 *   **Users:** View a list of all user accounts (standard users, doctors, admins).
-*   **Create Admin:** Use the form to create a *new* user account with the `type` automatically set to `admin`. This route is protected and requires the logged-in user to be an admin.
+*   **Create Admin:** Use the form to create a *new* user account with the `type` automatically set to `admin`. This route (`/api/admin/registeradmin`) is protected and requires the logged-in user to be an admin.
 *   **Notifications:** View and manage notifications (e.g., new doctor applications) from the header icon.
 *   **Logout:** Log out from the sidebar.
 
@@ -190,5 +174,3 @@ The application should now be running and accessible in your browser.
 *   Write deployment instructions for platforms like Heroku, Render, or Vercel/AWS.
 
 ---
-
-This README should provide a solid starting point for understanding and using your project!
